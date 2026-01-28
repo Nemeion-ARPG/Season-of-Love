@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Season of Love Item Roller</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Season of Love Item Roller</h1>
+        
+        <div class="tab-container">
+            <!-- Tab Navigation -->
+            <div class="tab-buttons">
+                <button class="tab-button active" onclick="showTab('cupidCalculator')">Cupid's Point Calculator</button>
+                <button class="tab-button" onclick="showTab('cupidCubRoller')">Cupid's Cub Roller</button>
+                <button class="tab-button" onclick="showTab('royalAffair')">A Royal Affair</button>
+                <button class="tab-button" onclick="showTab('compassionPrompts')">Compassion Prompts</button>
+            </div>
+
+            <!-- Tab 1: Cupid's Gift Exchange -->
+            <div id="cupidCalculator" class="tab-content active">
+                <div class="tab-header">
+                    <h2>Cupid's Gift Exchange</h2>
+                    <p>First roll points to determine cub quality, then roll cubs on the next tab.</p>
+                </div>
+                
+                <div id="cupid-roller-content">
+                    <div class="input-container">
+                        <div class="input-column">
+                            <div class="input-group">
+                                <label class="radio-option" for="artworkEntry">
+                                    <input type="radio" id="artworkEntry" name="cupidEntry" value="artwork">
+                                    <span>Artwork Entry</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="input-column">
+                            <div class="input-group">
+                                <label class="radio-option" for="literatureEntry">
+                                    <input type="radio" id="literatureEntry" name="cupidEntry" value="literature">
+                                    <span>Literature Entry</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="artworkOptions" class="input-group" style="display: none;">
+                        <label>Artwork Options:</label>
+                        <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px;">
+                            <label style="display: flex; align-items: center; margin-right: 15px;">
+                                <input type="checkbox" id="headshot" name="artworkCheckbox" value="headshot">
+                                <span style="margin-left: 5px; font-size: 12px;">Headshot</span>
+                            </label>
+                            <label style="display: flex; align-items: center; margin-right: 15px;">
+                                <input type="checkbox" id="fullBody" name="artworkCheckbox" value="fullBody">
+                                <span style="margin-left: 5px; font-size: 12px;">Full-Body</span>
+                            </label>
+                            <label style="display: flex; align-items: center; margin-right: 15px;">
+                                <input type="checkbox" id="characterShading" name="artworkCheckbox" value="characterShading">
+                                <span style="margin-left: 5px; font-size: 12px;">Character Shading</span>
+                            </label>
+                            <label style="display: flex; align-items: center; margin-right: 15px;">
+                                <input type="checkbox" id="simpleBackground" name="artworkCheckbox" value="simpleBackground">
+                                <span style="margin-left: 5px; font-size: 12px;">Simple Background</span>
+                            </label>
+                            <label style="display: flex; align-items: center; margin-right: 15px;">
+                                <input type="checkbox" id="complexBackground" name="artworkCheckbox" value="complexBackground">
+                                <span style="margin-left: 5px; font-size: 12px;">Complex Background</span>
+                            </label>
+                            <label style="display: flex; align-items: center; margin-right: 15px;">
+                                <input type="checkbox" id="shortStory" name="artworkCheckbox" value="shortStory">
+                                <span style="margin-left: 5px; font-size: 12px;">400+ Word Short Story</span>
+                            </label>
+                        </div>
+                        
+                        <div class="input-container" style="margin-top: 15px;">
+                            <div class="input-column">
+                                <div class="input-group">
+                                    <label for="unbiasedEffortScore">Unbiased Effort Score:</label>
+                                    <input type="number" id="unbiasedEffortScore" name="unbiasedEffortScore" placeholder="Enter 1 - 40" min="1" max="40">
+                                </div>
+                            </div>
+                            
+                            <div class="input-column">
+                                <div class="input-group">
+                                    <label for="additionalCharacters">Additional Characters:</label>
+                                    <input type="number" id="additionalCharacters" name="additionalCharacters" placeholder="Enter 0 - 5" min="0" max="5">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="literatureOptions" class="input-group" style="display: none;">
+                        <label>Literature Options:</label>
+                        <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px;">
+                            <label style="display: flex; align-items: center; margin-right: 15px;">
+                                <input type="checkbox" id="poem" name="literatureCheckbox" value="poem">
+                                <span style="margin-left: 5px; font-size: 12px;">Poem</span>
+                            </label>
+                            <label style="display: flex; align-items: center; margin-right: 15px;">
+                                <input type="checkbox" id="words400" name="literatureCheckbox" value="words400">
+                                <span style="margin-left: 5px; font-size: 12px;">400+ Words</span>
+                            </label>
+                            <label style="display: flex; align-items: center; margin-right: 15px;">
+                                <input type="checkbox" id="words800" name="literatureCheckbox" value="words800">
+                                <span style="margin-left: 5px; font-size: 12px;">800+ Words</span>
+                            </label>
+                            <label style="display: flex; align-items: center; margin-right: 15px;">
+                                <input type="checkbox" id="words1200" name="literatureCheckbox" value="words1200">
+                                <span style="margin-left: 5px; font-size: 12px;">1,200+ Words</span>
+                            </label>
+                        </div>
+                        
+                        <div class="input-container" style="margin-top: 15px;">
+                            <div class="input-column">
+                                <div class="input-group">
+                                    <label for="unbiasedEffortScoreLit">Unbiased Effort Score:</label>
+                                    <input type="number" id="unbiasedEffortScoreLit" name="unbiasedEffortScoreLit" placeholder="Enter 1 - 40" min="1" max="40">
+                                </div>
+                            </div>
+                            
+                            <div class="input-column">
+                                <div class="input-group">
+                                    <label for="additionalCharactersLit">Additional Characters:</label>
+                                    <input type="number" id="additionalCharactersLit" name="additionalCharactersLit" placeholder="Enter 0 - 5" min="0" max="5">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="roll-button" onclick="rollCupidGift()">Calculate Points</button>
+                    <button class="reset-button" onclick="resetCupidCalculator()">Reset</button>
+                    <div id="cupid-results" class="results hidden">
+                        <h3>The final score has been revealed.</h3>
+                        <div id="cupid-items"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 2: Cupid's Cub Roller -->
+            <div id="cupidCubRoller" class="tab-content">
+                <div class="tab-header">
+                    <h2>Cupid's Cub Roller</h2>
+                    <p>Roll for cubs based on calculated points. Do not round up. If they have not yet reached the required points for the next tier, roll the cub they have actually earned.</p>
+                </div>
+                
+                <div id="cupid-cub-content">
+                    <div class="input-group">
+                        <label for="cubType">Choose Cub Type:</label>
+                        <select id="cubType" name="cubType">
+                            <option value="">-- Select a cub type --</option>
+                            <option value="base">Base Cub (15 Points)</option>
+                            <option value="bronze">Bronze Cub (30 Points)</option>
+                            <option value="silver">Silver Cub (45 Points)</option>
+                            <option value="gold">Gold Cub (60 Points)</option>
+                            <option value="platinum">Platinum Cub (75 Points)</option>
+                            <option value="chroma">Chroma Cub (80+ Points)</option>
+                        </select>
+                    </div>
+                    
+                    <button class="roll-button" onclick="rollCupidCubs()">Roll for Cub</button>
+                    <button class="reset-button" onclick="resetCupidCubRoller()">Reset</button>
+                    <div id="cupid-cub-results" class="results hidden">
+                        <h3>Your Cub:</h3>
+                        <div id="cupid-cub-items"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 3: A Royal Affair -->
+            <div id="royalAffair" class="tab-content">
+                <div class="tab-header">
+                    <h2>A Royal Affair</h2>
+                    <p>Roll to determine woo chance.</p>
+                </div>
+                
+                <div id="royal-affair-content">
+                    <div class="input-container">
+                        <div class="input-column">
+                            <div class="input-group">
+                                <label for="royalCharacter">Character:</label>
+                                <input type="text" id="royalCharacter" name="royalCharacter" placeholder="Enter character name...">
+                            </div>
+                        </div>
+                        
+                        <div class="input-column">
+                            <div class="input-group">
+                                <label for="royalStarter">Starter:</label>
+                                <input type="text" id="royalStarter" name="royalStarter" placeholder="Enter starter...">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="royalCategory">Choose Starter Tier:</label>
+                        <select id="royalCategory" name="royalCategory">
+                            <option value="">-- Select a starter tier --</option>
+                            <option value="bronze">Bronze Starter (60% success)</option>
+                            <option value="silver">Silver Starter (50% success)</option>
+                            <option value="gold">Gold Starter (40% success)</option>
+                            <option value="platinum">Platinum Starter (30% success)</option>
+                            <option value="chroma">Chroma Starter (20% success)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label>Persistence Level:</label>
+                        <div class="radio-group">
+                            <label class="radio-option" for="persistenceNone">
+                                <input type="radio" id="persistenceNone" name="persistence" value="none" checked>
+                                <span>None</span>
+                            </label>
+                            <label class="radio-option" for="persistence1">
+                                <input type="radio" id="persistence1" name="persistence" value="persistence1">
+                                <span>Persistence 1 (+10% success)</span>
+                            </label>
+                            <label class="radio-option" for="persistence2">
+                                <input type="radio" id="persistence2" name="persistence" value="persistence2">
+                                <span>Persistence 2 (+20% success)</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label>
+                            <input type="checkbox" id="effortBonus" name="effortBonus">
+                            Effort Bonus (+5% success)
+                        </label>
+                    </div>
+                    
+                    <button class="roll-button" onclick="rollRoyalAffair()">Roll Royal Affair</button>
+                    <button class="reset-button" onclick="resetRoyalAffair()">Reset</button>
+                    <div id="royal-results" class="results hidden">
+                        <div id="royal-items"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 3: Compassion Prompts -->
+            <div id="compassionPrompts" class="tab-content">
+                <div class="tab-header">
+                    <h2>Compassion Prompts</h2>
+                    <p>Roll seasonal prompts.</p>
+                </div>
+                
+                <div id="compassion-prompts-content">
+                    <div class="input-container">
+                        <div class="input-column">
+                            <h3>Character Names</h3>
+                            <div class="input-group">
+                                <label for="char1">Character 1:</label>
+                                <input type="text" id="char1" name="char1" placeholder="Enter character name...">
+                            </div>
+                            <div class="input-group">
+                                <label for="char2">Character 2:</label>
+                                <input type="text" id="char2" name="char2" placeholder="Enter character name...">
+                            </div>
+                            <div class="input-group">
+                                <label for="char3">Character 3:</label>
+                                <input type="text" id="char3" name="char3" placeholder="Enter character name...">
+                            </div>
+                        </div>
+                        
+                        <div class="input-column">
+                            <h3>Player Usernames</h3>
+                            <div class="input-group">
+                                <label for="player1">Player 1:</label>
+                                <input type="text" id="player1" name="player1" placeholder="@ username...">
+                            </div>
+                            <div class="input-group">
+                                <label for="player2">Player 2:</label>
+                                <input type="text" id="player2" name="player2" placeholder="@ username...">
+                            </div>
+                            <div class="input-group">
+                                <label for="player3">Player 3:</label>
+                                <input type="text" id="player3" name="player3" placeholder="@ username...">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="promptSelect">Choose a Compassion Prompt:</label>
+                        <select id="promptSelect" name="promptSelect">
+                            <option value="">-- Select a prompt --</option>
+                            <option value="prompt1">Prompt 1: Bond and Affection </option>
+                            <option value="prompt2">Prompt 2: Quality Courtship</option>
+                            <option value="prompt3">Prompt 3: Unrequited Love</option>
+                            <option value="prompt4">Prompt 4: Kissing Booth</option>
+                            <option value="prompt5">Prompt 5: Love Letters and Tokens</option>
+                        </select>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label>
+                            <input type="checkbox" id="effortLootCheck" name="effortLootCheck">
+                            Effort Bonus (Enhanced Rewards)
+                        </label>
+                    </div>
+                    
+                    <button class="roll-button" onclick="rollCompassionPrompt()">Roll Compassion Prompt</button>
+                    <button class="reset-button" onclick="resetCompassionPrompts()">Reset</button>
+                    <div id="compassion-results" class="results hidden">
+                        <div id="compassion-items"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load all JavaScript files -->
+    <script src="Data/loot.js"></script>
+    <script src="Data/prompts.js"></script>
+    <script src="Data/breeding.js"></script>
+    <script src="Data/cubs.js"></script>
+    <script src="Scripts/script.js"></script>
+    <script src="Code/pointcalulator.js"></script>
+    <script src="Code/cupidroller.js"></script>
+    <script src="Code/royalaffair.js"></script>
+    <script src="Code/compassionprompts.js"></script>
+
+    <script>
+        // Tab switching functionality
+        function showTab(tabName) {
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Remove active class from all tab buttons
+            const tabButtons = document.querySelectorAll('.tab-button');
+            tabButtons.forEach(button => {
+                button.classList.remove('active');
+            });
+
+            // Show the selected tab
+            document.getElementById(tabName).classList.add('active');
+
+            // Activate the clicked button
+            event.target.classList.add('active');
+        }
+
+        // Placeholder functions for rolling - these will be implemented in their respective JS files
+        // rollCupidGift is now implemented in pointcalulator.js
+        // rollCupidCubs is now implemented in cupidroller.js
+
+        // Reset functions for each tab
+        function resetCupidCalculator() {
+            // Reset radio buttons
+            document.getElementById('artworkEntry').checked = false;
+            document.getElementById('literatureEntry').checked = false;
+            
+            // Reset artwork checkboxes
+            ['headshot', 'fullBody', 'characterShading', 'simpleBackground', 'complexBackground', 'shortStory'].forEach(id => {
+                const checkbox = document.getElementById(id);
+                if (checkbox) {
+                    checkbox.checked = false;
+                    checkbox.disabled = false;
+                    checkbox.style.opacity = '1';
+                    checkbox.parentElement.style.opacity = '1';
+                }
+            });
+            
+            // Reset literature checkboxes
+            ['poem', 'words400', 'words800', 'words1200'].forEach(id => {
+                const checkbox = document.getElementById(id);
+                if (checkbox) {
+                    checkbox.checked = false;
+                    checkbox.disabled = false;
+                    checkbox.style.opacity = '1';
+                    checkbox.parentElement.style.opacity = '1';
+                }
+            });
+            
+            // Reset input fields
+            document.getElementById('unbiasedEffortScore').value = '';
+            document.getElementById('additionalCharacters').value = '';
+            document.getElementById('unbiasedEffortScoreLit').value = '';
+            document.getElementById('additionalCharactersLit').value = '';
+            
+            // Hide options and results
+            document.getElementById('artworkOptions').style.display = 'none';
+            document.getElementById('literatureOptions').style.display = 'none';
+            document.getElementById('cupid-results').classList.add('hidden');
+        }
+
+        function resetCupidCubRoller() {
+            // Reset cub type selection
+            document.getElementById('cubType').value = '';
+            
+            // Hide results
+            document.getElementById('cupid-cub-results').classList.add('hidden');
+        }
+
+        function resetRoyalAffair() {
+            // Reset input fields
+            document.getElementById('royalCharacter').value = '';
+            document.getElementById('royalStarter').value = '';
+            document.getElementById('royalCategory').value = '';
+            
+            // Reset persistence radio buttons
+            document.getElementById('persistenceNone').checked = true;
+            document.getElementById('persistence1').checked = false;
+            document.getElementById('persistence2').checked = false;
+            
+            // Reset effort bonus checkbox
+            document.getElementById('effortBonus').checked = false;
+            
+            // Hide results
+            document.getElementById('royal-results').classList.add('hidden');
+        }
+
+        function resetCompassionPrompts() {
+            // Reset character input fields
+            document.getElementById('char1').value = '';
+            document.getElementById('char2').value = '';
+            document.getElementById('char3').value = '';
+            
+            // Reset player input fields
+            document.getElementById('player1').value = '';
+            document.getElementById('player2').value = '';
+            document.getElementById('player3').value = '';
+            
+            // Reset prompt selection
+            document.getElementById('promptSelect').value = '';
+            
+            // Reset effort bonus checkbox
+            document.getElementById('effortLootCheck').checked = false;
+            
+            // Hide results
+            document.getElementById('compassion-results').classList.add('hidden');
+        }
+
+        // rollRoyalAffair is now implemented in royalaffair.js
+
+        // rollCompassionPrompt is now implemented in compassionprompts.js
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Season of Love Item Roller loaded successfully');
+            
+            // Add event listeners for cupid entry radio buttons
+            const artworkRadio = document.getElementById('artworkEntry');
+            const literatureRadio = document.getElementById('literatureEntry');
+            const artworkOptions = document.getElementById('artworkOptions');
+            const literatureOptions = document.getElementById('literatureOptions');
+            
+            if (artworkRadio && literatureRadio && artworkOptions && literatureOptions) {
+                artworkRadio.addEventListener('change', function() {
+                    if (this.checked) {
+                        artworkOptions.style.display = 'block';
+                        literatureOptions.style.display = 'none';
+                    }
+                });
+                
+                literatureRadio.addEventListener('change', function() {
+                    if (this.checked) {
+                        artworkOptions.style.display = 'none';
+                        literatureOptions.style.display = 'block';
+                    }
+                });
+            }
+            
+            // Add mutual exclusivity for headshot and full-body checkboxes
+            const headshot = document.getElementById('headshot');
+            const fullBody = document.getElementById('fullBody');
+            
+            if (headshot && fullBody) {
+                headshot.addEventListener('change', function() {
+                    if (this.checked) {
+                        fullBody.disabled = true;
+                        fullBody.style.opacity = '0.5';
+                        fullBody.parentElement.style.opacity = '0.5';
+                    } else {
+                        fullBody.disabled = false;
+                        fullBody.style.opacity = '1';
+                        fullBody.parentElement.style.opacity = '1';
+                    }
+                });
+                
+                fullBody.addEventListener('change', function() {
+                    if (this.checked) {
+                        headshot.disabled = true;
+                        headshot.style.opacity = '0.5';
+                        headshot.parentElement.style.opacity = '0.5';
+                    } else {
+                        headshot.disabled = false;
+                        headshot.style.opacity = '1';
+                        headshot.parentElement.style.opacity = '1';
+                    }
+                });
+            }
+            
+            // Add mutual exclusivity for background checkboxes
+            const simpleBackground = document.getElementById('simpleBackground');
+            const complexBackground = document.getElementById('complexBackground');
+            
+            if (simpleBackground && complexBackground) {
+                simpleBackground.addEventListener('change', function() {
+                    if (this.checked) {
+                        complexBackground.disabled = true;
+                        complexBackground.style.opacity = '0.5';
+                        complexBackground.parentElement.style.opacity = '0.5';
+                    } else {
+                        complexBackground.disabled = false;
+                        complexBackground.style.opacity = '1';
+                        complexBackground.parentElement.style.opacity = '1';
+                    }
+                });
+                
+                complexBackground.addEventListener('change', function() {
+                    if (this.checked) {
+                        simpleBackground.disabled = true;
+                        simpleBackground.style.opacity = '0.5';
+                        simpleBackground.parentElement.style.opacity = '0.5';
+                    } else {
+                        simpleBackground.disabled = false;
+                        simpleBackground.style.opacity = '1';
+                        simpleBackground.parentElement.style.opacity = '1';
+                    }
+                });
+            }
+            
+            // Add mutual exclusivity for literature checkboxes
+            const literatureCheckboxes = ['poem', 'words400', 'words800', 'words1200'];
+            
+            literatureCheckboxes.forEach(checkboxId => {
+                const checkbox = document.getElementById(checkboxId);
+                if (checkbox) {
+                    checkbox.addEventListener('change', function() {
+                        if (this.checked) {
+                            // Disable all other literature checkboxes
+                            literatureCheckboxes.forEach(otherId => {
+                                if (otherId !== checkboxId) {
+                                    const otherCheckbox = document.getElementById(otherId);
+                                    if (otherCheckbox) {
+                                        otherCheckbox.disabled = true;
+                                        otherCheckbox.style.opacity = '0.5';
+                                        otherCheckbox.parentElement.style.opacity = '0.5';
+                                    }
+                                }
+                            });
+                        } else {
+                            // Re-enable all other literature checkboxes
+                            literatureCheckboxes.forEach(otherId => {
+                                if (otherId !== checkboxId) {
+                                    const otherCheckbox = document.getElementById(otherId);
+                                    if (otherCheckbox) {
+                                        otherCheckbox.disabled = false;
+                                        otherCheckbox.style.opacity = '1';
+                                        otherCheckbox.parentElement.style.opacity = '1';
+                                    }
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
