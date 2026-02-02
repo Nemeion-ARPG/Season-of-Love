@@ -122,10 +122,10 @@ function rollWeightedCurrency() {
 
 function rollWeightedLoveLetters() {
     // Weighted roll that favors 1-5 over 6-10
-    // 70% chance for 1-5, 30% chance for 6-10
+    // 80% chance for 1-5, 20% chance for 6-10
     const random = Math.random();
     
-    if (random < 0.7) {
+    if (random < 0.8) {
         // Roll 1-5
         return Math.floor(Math.random() * 5) + 1;
     } else {
