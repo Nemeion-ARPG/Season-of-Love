@@ -14,14 +14,17 @@ function rollCompassionPrompt() {
     const char1 = document.getElementById('char1').value.trim();
     const char2 = document.getElementById('char2').value.trim();
     const char3 = document.getElementById('char3').value.trim();
+    const char4 = document.getElementById('char4').value.trim();
     const player1 = document.getElementById('player1').value.trim();
     const player2 = document.getElementById('player2').value.trim();
     const player3 = document.getElementById('player3').value.trim();
+    const player4 = document.getElementById('player4').value.trim();
     
     const characters = [
         { char: char1, player: player1 },
         { char: char2, player: player2 },
-        { char: char3, player: player3 }
+        { char: char3, player: player3 },
+        { char: char4, player: player4 }
     ].filter(entry => entry.char !== '');
     
     const characterNames = characters.map(entry => entry.char);
@@ -46,15 +49,20 @@ function rollCompassionPrompt() {
             const currencyCount = rollWeightedCurrency();
             const currencyItems = rollItems(itemData.currency, currencyCount);
             
-            // Roll for loot items (1-4) from selected source
-            const lootCount = Math.floor(Math.random() * 4) + 1;
+            // Roll for loot items (1-2) from selected source
+            const lootCount = Math.floor(Math.random() * 2) + 1;
             const lootItems = rollItems(lootSource, lootCount);
+            
+            // Roll for love letters (1-10, weighted toward 1-5)
+            const loveLetterCount = rollWeightedLoveLetters();
+            const loveLetterItems = rollItems(itemData.loveletters, loveLetterCount);
             
             characterRewards.push({
                 name: character.char,
                 player: character.player,
                 currencyItems: currencyItems,
-                lootItems: lootItems
+                lootItems: lootItems,
+                loveLetterItems: loveLetterItems
             });
         });
     } else {
@@ -62,13 +70,18 @@ function rollCompassionPrompt() {
         const currencyCount = rollWeightedCurrency();
         const currencyItems = rollItems(itemData.currency, currencyCount);
         
-        const lootCount = Math.floor(Math.random() * 4) + 1;
+        const lootCount = Math.floor(Math.random() * 2) + 1;
         const lootItems = rollItems(lootSource, lootCount);
+        
+        // Roll for love letters (1-10, weighted toward 1-5)
+        const loveLetterCount = rollWeightedLoveLetters();
+        const loveLetterItems = rollItems(itemData.loveletters, loveLetterCount);
         
         characterRewards.push({
             name: '',
             currencyItems: currencyItems,
-            lootItems: lootItems
+            lootItems: lootItems,
+            loveLetterItems: loveLetterItems
         });
     }
     
@@ -94,6 +107,20 @@ function rollItems(itemArray, count) {
 }
 
 function rollWeightedCurrency() {
+    // Weighted roll that favors 1-250 over 251-500
+    // 70% chance for 1-250, 30% chance for 251-500
+    const random = Math.random();
+    
+    if (random < 0.7) {
+        // Roll 1-250
+        return Math.floor(Math.random() * 250) + 1;
+    } else {
+        // Roll 251-500
+        return Math.floor(Math.random() * 250) + 251;
+    }
+}
+
+function rollWeightedLoveLetters() {
     // Weighted roll that favors 1-5 over 6-10
     // 70% chance for 1-5, 30% chance for 6-10
     const random = Math.random();
@@ -132,7 +159,7 @@ function displayCompassionResults(promptText, characterRewards) {
     
     // Display rewards for each character
     characterRewards.forEach(characterReward => {
-        const allItems = [...characterReward.currencyItems, ...characterReward.lootItems];
+        const allItems = [...characterReward.currencyItems, ...characterReward.lootItems, ...characterReward.loveLetterItems];
         
         if (allItems.length > 0) {
             // Count item quantities
@@ -171,7 +198,7 @@ function displayCompassionResults(promptText, characterRewards) {
             // Display items with quantities
             Object.keys(itemCounts).forEach(itemName => {
                 const item = itemCounts[itemName];
-                const quantityText = item.count > 1 ? `x${item.count} ` : '';
+                const quantityText = `x${item.count} `;
                 
                 if (item.link && item.link !== '#') {
                     resultHTML += `<li><a href="${item.link}" target="_blank">${quantityText}${itemName}</a></li>`;

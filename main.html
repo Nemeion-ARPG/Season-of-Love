@@ -251,32 +251,54 @@
                         <div class="input-column">
                             <h3>Character Names</h3>
                             <div class="input-group">
+                                <label class="checkbox-option" for="showAdditionalChars">
+                                    <input type="checkbox" id="showAdditionalChars" onchange="toggleAdditionalCharacters()">
+                                    <span>Add more characters</span>
+                                </label>
+                            </div>
+                            <div class="input-group">
                                 <label for="char1">Character 1:</label>
                                 <input type="text" id="char1" name="char1" placeholder="Enter character name...">
                             </div>
-                            <div class="input-group">
-                                <label for="char2">Character 2:</label>
-                                <input type="text" id="char2" name="char2" placeholder="Enter character name...">
-                            </div>
-                            <div class="input-group">
-                                <label for="char3">Character 3:</label>
-                                <input type="text" id="char3" name="char3" placeholder="Enter character name...">
+                            <div id="additionalCharactersDiv" style="display: none;">
+                                <div class="input-group">
+                                    <label for="char2">Character 2:</label>
+                                    <input type="text" id="char2" name="char2" placeholder="Enter character name...">
+                                </div>
+                                <div class="input-group">
+                                    <label for="char3">Character 3:</label>
+                                    <input type="text" id="char3" name="char3" placeholder="Enter character name...">
+                                </div>
+                                <div class="input-group">
+                                    <label for="char4">Character 4:</label>
+                                    <input type="text" id="char4" name="char4" placeholder="Enter character name...">
+                                </div>
                             </div>
                         </div>
                         
                         <div class="input-column">
                             <h3>Player Usernames</h3>
+                            <div class="input-group" style="visibility: hidden;">
+                                <!-- Empty space to align with checkbox -->
+                                <span>&nbsp;</span>
+                            </div>
                             <div class="input-group">
                                 <label for="player1">Player 1:</label>
                                 <input type="text" id="player1" name="player1" placeholder="@ username...">
                             </div>
-                            <div class="input-group">
-                                <label for="player2">Player 2:</label>
-                                <input type="text" id="player2" name="player2" placeholder="@ username...">
-                            </div>
-                            <div class="input-group">
-                                <label for="player3">Player 3:</label>
-                                <input type="text" id="player3" name="player3" placeholder="@ username...">
+                            <div id="additionalPlayers" style="display: none;">
+                                <div class="input-group">
+                                    <label for="player2">Player 2:</label>
+                                    <input type="text" id="player2" name="player2" placeholder="@ username...">
+                                </div>
+                                <div class="input-group">
+                                    <label for="player3">Player 3:</label>
+                                    <input type="text" id="player3" name="player3" placeholder="@ username...">
+                                </div>
+                                <div class="input-group">
+                                    <label for="player4">Player 4:</label>
+                                    <input type="text" id="player4" name="player4" placeholder="@ username...">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -418,11 +440,18 @@
             document.getElementById('char1').value = '';
             document.getElementById('char2').value = '';
             document.getElementById('char3').value = '';
+            document.getElementById('char4').value = '';
             
             // Reset player input fields
             document.getElementById('player1').value = '';
             document.getElementById('player2').value = '';
             document.getElementById('player3').value = '';
+            document.getElementById('player4').value = '';
+            
+            // Reset additional characters checkbox and hide additional fields
+            document.getElementById('showAdditionalChars').checked = false;
+            document.getElementById('additionalCharactersDiv').style.display = 'none';
+            document.getElementById('additionalPlayers').style.display = 'none';
             
             // Reset prompt selection
             document.getElementById('promptSelect').value = '';
@@ -432,6 +461,39 @@
             
             // Hide results
             document.getElementById('compassion-results').classList.add('hidden');
+        }
+
+        function toggleAdditionalCharacters() {
+            const checkbox = document.getElementById('showAdditionalChars');
+            const additionalCharacters = document.getElementById('additionalCharactersDiv');
+            const additionalPlayers = document.getElementById('additionalPlayers');
+            
+            console.log('Checkbox checked:', checkbox.checked);
+            console.log('Characters element:', additionalCharacters);
+            console.log('Players element:', additionalPlayers);
+            
+            if (checkbox.checked) {
+                if (additionalCharacters) {
+                    additionalCharacters.style.display = 'block';
+                }
+                if (additionalPlayers) {
+                    additionalPlayers.style.display = 'block';
+                }
+            } else {
+                if (additionalCharacters) {
+                    additionalCharacters.style.display = 'none';
+                }
+                if (additionalPlayers) {
+                    additionalPlayers.style.display = 'none';
+                }
+                // Clear the hidden fields when hiding them
+                document.getElementById('char2').value = '';
+                document.getElementById('char3').value = '';
+                document.getElementById('char4').value = '';
+                document.getElementById('player2').value = '';
+                document.getElementById('player3').value = '';
+                document.getElementById('player4').value = '';
+            }
         }
 
         // rollRoyalAffair is now implemented in royalaffair.js
