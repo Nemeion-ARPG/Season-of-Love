@@ -94,8 +94,7 @@ function rollItems(itemArray, count) {
     
     for (let i = 0; i < count; i++) {
         if (itemArray && itemArray.length > 0) {
-            const randomIndex = Math.floor(Math.random() * itemArray.length);
-            const item = itemArray[randomIndex];
+            const item = pickWeightedItem(itemArray);
             rolledItems.push({
                 name: item.name,
                 link: item.link || '#'
@@ -104,6 +103,50 @@ function rollItems(itemArray, count) {
     }
     
     return rolledItems;
+}
+
+function pickWeightedItem(itemArray) {
+    // Weighted selection: items with lower weight values roll less frequently.
+    // Falls back to uniform selection if weights are missing/invalid.
+    if (!itemArray || itemArray.length === 0) return null;
+
+    let totalWeight = 0;
+    let hasValidWeight = false;
+
+    for (const item of itemArray) {
+        const weight = Number(item?.weight);
+        if (Number.isFinite(weight) && weight > 0) {
+            totalWeight += weight;
+            hasValidWeight = true;
+        } else {
+            totalWeight += 1;
+        }
+    }
+
+    if (!Number.isFinite(totalWeight) || totalWeight <= 0) {
+        const randomIndex = Math.floor(Math.random() * itemArray.length);
+        return itemArray[randomIndex];
+    }
+
+    // If no item had a valid weight field, treat this as a plain uniform roll.
+    // (Using the accumulated "1" weights would be equivalent, but this keeps intent explicit.)
+    if (!hasValidWeight) {
+        const randomIndex = Math.floor(Math.random() * itemArray.length);
+        return itemArray[randomIndex];
+    }
+
+    const randomNum = Math.random() * totalWeight;
+    let currentWeight = 0;
+
+    for (const item of itemArray) {
+        const weight = Number(item?.weight);
+        currentWeight += Number.isFinite(weight) && weight > 0 ? weight : 1;
+        if (randomNum <= currentWeight) {
+            return item;
+        }
+    }
+
+    return itemArray[itemArray.length - 1];
 }
 
 function rollWeightedCurrency() {
