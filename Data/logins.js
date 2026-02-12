@@ -4,5 +4,5 @@
 //
 // Replace or extend this list as needed.
 window.SEASON_OF_LOVE_LOGINS = [
-  { username: 'demo', password: 'demo' }
+  { username: 'demo', password: 'demo', privileges: 'demo' }
 ];

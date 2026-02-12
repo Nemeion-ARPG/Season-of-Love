@@ -60,6 +60,9 @@ function rollCompassionPrompt() {
             characterRewards.push({
                 name: character.char,
                 player: character.player,
+                currencyCount: currencyCount,
+                lootCount: lootCount,
+                loveLetterCount: loveLetterCount,
                 currencyItems: currencyItems,
                 lootItems: lootItems,
                 loveLetterItems: loveLetterItems
@@ -79,23 +82,51 @@ function rollCompassionPrompt() {
         
         characterRewards.push({
             name: '',
+            currencyCount: currencyCount,
+            lootCount: lootCount,
+            loveLetterCount: loveLetterCount,
             currencyItems: currencyItems,
             lootItems: lootItems,
             loveLetterItems: loveLetterItems
         });
     }
 
+    function summarizeItemsByName(items) {
+        const counts = {};
+        const safeItems = Array.isArray(items) ? items : [];
+        for (const item of safeItems) {
+            const name = String(item?.name ?? '').trim();
+            if (!name) continue;
+            counts[name] = (counts[name] || 0) + 1;
+        }
+        return {
+            total: safeItems.length,
+            counts
+        };
+    }
+
     if (typeof window.logSeasonOfLoveRoll === 'function') {
+        const rewardsSummary = characterRewards.map(reward => {
+            const currencyCount = Number.isFinite(reward.currencyCount) ? reward.currencyCount : (reward.currencyItems?.length || 0);
+            const loveLetterCount = Number.isFinite(reward.loveLetterCount) ? reward.loveLetterCount : (reward.loveLetterItems?.length || 0);
+
+            return {
+                name: reward.name,
+                player: reward.player,
+                currency: { name: 'Coins', count: currencyCount },
+                loot: summarizeItemsByName(reward.lootItems),
+                loveLetters: { name: 'Love Letters', count: loveLetterCount }
+            };
+        });
+
         window.logSeasonOfLoveRoll(
             'Compassion Prompts',
             {
-                selectedPrompt,
                 effortLootEnabled,
                 characters
             },
             {
-                promptText,
-                characterRewards
+                rewardsSummary
             }
         );
     }

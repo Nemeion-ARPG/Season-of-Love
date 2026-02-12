@@ -8,13 +8,12 @@
 // using fetch(mode: 'no-cors') so the request works without CORS preflight.
 
 (function () {
-	// TODO: Set this to your deployed Apps Script Web App URL.
-	// Example: https://script.google.com/macros/s/<DEPLOYMENT_ID>/exec
-	const SHEETS_LOGGER_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxq9VkhDx9Pbcw5OSW-I7WthN5cS_xxkxN57krvpT06TsRLBEZusapima8_Joiiv4DV6g/exec';
-	const SHEETS_LOGGER_SHEET_NAME = 'SoL Logs';
+	// Prefer shared config from Scripts/sol-config.js
+	const SHEETS_LOGGER_ENDPOINT = (window.SEASON_OF_LOVE_SHEETS_ENDPOINT || '').trim();
+	const SHEETS_LOGGER_SHEET_NAME = (window.SEASON_OF_LOVE_LOGS_SHEET_NAME || 'SoL Logs').trim();
 
 	function isEnabled() {
-		return typeof SHEETS_LOGGER_ENDPOINT === 'string' && SHEETS_LOGGER_ENDPOINT.trim().length > 0;
+		return typeof SHEETS_LOGGER_ENDPOINT === 'string' && SHEETS_LOGGER_ENDPOINT.length > 0;
 	}
 
 	function getUsername() {
