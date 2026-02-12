@@ -83,6 +83,7 @@ const bronzeCub = {
         { name: "Addere", weight: 25 },
         { name: "Aspera", weight: 25 },
         { name: "Bellus", weight: 25 },
+        { name: "Cineres (Rust Variant)", weight: 25 },
         { name: "Equus", weight: 25 },
         { name: "Feles", weight: 25 },
         { name: "Humero", weight: 25 },
@@ -142,6 +143,7 @@ const silverCub = {
         { name: "Addere", weight: 25 },
         { name: "Aspera", weight: 25 },
         { name: "Bellus", weight: 25 },
+        { name: "Cineres (Sand Variant)", weight: 25 },
         { name: "Equus", weight: 25 },
         { name: "Feles", weight: 25 },
         { name: "Humero", weight: 25 },
@@ -159,6 +161,7 @@ const silverCub = {
         { name: "Avis", weight: 15 },
         { name: "Caenum", weight: 15 },
         { name: "Cordis", weight: 15 },
+        { name: "Eluvio", weight: 15 },
         { name: "Latus", weight: 15 },
         { name: "Melis", weight: 15 },
         { name: "Pluma", weight: 15 },
@@ -215,6 +218,7 @@ const goldCub = {
         { name: "Addere", weight: 25 },
         { name: "Aspera", weight: 25 },
         { name: "Bellus", weight: 25 },
+        { name: "Cineres (Ash Variant)", weight: 25 },
         { name: "Equus", weight: 25 },
         { name: "Feles", weight: 25 },
         { name: "Humero", weight: 25 },
@@ -232,6 +236,7 @@ const goldCub = {
         { name: "Avis", weight: 15 },
         { name: "Caenum", weight: 15 },
         { name: "Cordis", weight: 15 },
+        { name: "Eluvio", weight: 15 },
         { name: "Latus", weight: 15 },
         { name: "Melis", weight: 15 },
         { name: "Pluma", weight: 15 },
@@ -261,7 +266,8 @@ const goldCub = {
         { name: "Polycaudal", weight: 5 },
         { name: "Raptor Claws", weight: 2 },
         { name: "Double Tusk", weight: 2 },
-        { name: "Smilodon Sabers", weight: 2 }
+        { name: "Smilodon Sabers", weight: 2 },
+        { name: "Double Smilodon Sabers", weight: 2 }
     ],
 };
 
@@ -311,6 +317,8 @@ const platinumCub = {
         { name: "Addere", weight: 25 },
         { name: "Aspera", weight: 25 },
         { name: "Bellus", weight: 25 },
+        { name: "Cineres (Rust Variant)", weight: 25 },
+        { name: "Cineres (Ash Variant)", weight: 25 },
         { name: "Equus", weight: 25 },
         { name: "Feles", weight: 25 },
         { name: "Humero", weight: 25 },
@@ -328,6 +336,7 @@ const platinumCub = {
         { name: "Avis", weight: 25 },
         { name: "Caenum", weight: 25 },
         { name: "Cordis", weight: 25 },
+        { name: "Eluvio", weight: 25 },
         { name: "Latus", weight: 25 },
         { name: "Melis", weight: 25 },
         { name: "Pluma", weight: 25 },
@@ -357,7 +366,8 @@ const platinumCub = {
         { name: "Polycaudal", weight: 5 },
         { name: "Raptor Claws", weight: 2 },
         { name: "Double Tusk", weight: 2 },
-        { name: "Smilodon Sabers", weight: 2 }
+        { name: "Smilodon Sabers", weight: 2 },
+        { name: "Double Smilodon Sabers", weight: 2 }
     ],
 };
 
@@ -404,6 +414,8 @@ const chromaCub = {
         { name: "Addere", weight: 25 },
         { name: "Aspera", weight: 25 },
         { name: "Bellus", weight: 25 },
+        { name: "Cineres (Rust Variant)", weight: 25 },
+        { name: "Cineres (Ash Variant)", weight: 25 },
         { name: "Equus", weight: 25 },
         { name: "Feles", weight: 25 },
         { name: "Humero", weight: 25 },
@@ -421,6 +433,7 @@ const chromaCub = {
         { name: "Avis", weight: 25 },
         { name: "Caenum", weight: 25 },
         { name: "Cordis", weight: 25 },
+        { name: "Eluvio", weight: 25 },
         { name: "Latus", weight: 25 },
         { name: "Melis", weight: 25 },
         { name: "Pluma", weight: 25 },
@@ -450,7 +463,8 @@ const chromaCub = {
         { name: "Polycaudal", weight: 5 },
         { name: "Raptor Claws", weight: 2 },
         { name: "Double Tusk", weight: 2 },
-        { name: "Smilodon Sabers", weight: 2 }
+        { name: "Smilodon Sabers", weight: 2 },
+        { name: "Double Smilodon Sabers", weight: 2 }
     ],
     chromacubblessings: [
         { name: "Befuddling Brew", weight: 5 },

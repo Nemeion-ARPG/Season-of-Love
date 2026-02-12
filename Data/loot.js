@@ -1,6 +1,6 @@
 const itemData = {
     loot: [
-        { name: "Sloth Companion - Charlie", link: "https://www.deviantart.com/nemeionadmin/art/Sloth-Charlie-1154181335", weight: 15 },
+        { name: "Charlie Companion", link: "https://www.deviantart.com/nemeionadmin/art/Sloth-Charlie-1154181335", weight: 15 },
         { name: "Sloth Companion - Figgy", link: "https://www.deviantart.com/nemeionadmin/art/Sloth-Figgy-1154183493", weight: 5 },
         { name: "Sloth Companion - Petals", link: "https://www.deviantart.com/nemeionadmin/art/Sloth-Petals-1154184152", weight: 5 },
         { name: "Sloth Companion - Toby", link: "https://www.deviantart.com/nemeionadmin/art/Sloth-Toby-1154184952", weight: 5 },
@@ -70,7 +70,7 @@ const itemData = {
         { name: "Wildcard Trait", link: "https://www.deviantart.com/nemeionadmin/art/Wildcard-Trait-1293237315", weight: 1 }
     ],
     effortloot: [
-        { name: "Sloth Companion - Charlie", link: "https://www.deviantart.com/nemeionadmin/art/Sloth-Charlie-1154181335", weight: 15 },
+        { name: "Charlie Companion", link: "https://www.deviantart.com/nemeionadmin/art/Sloth-Charlie-1154181335", weight: 15 },
         { name: "Sloth Companion - Figgy", link: "https://www.deviantart.com/nemeionadmin/art/Sloth-Figgy-1154183493", weight: 5 },
         { name: "Sloth Companion - Petals", link: "https://www.deviantart.com/nemeionadmin/art/Sloth-Petals-1154184152", weight: 5 },
         { name: "Sloth Companion - Toby", link: "https://www.deviantart.com/nemeionadmin/art/Sloth-Toby-1154184952", weight: 5 },

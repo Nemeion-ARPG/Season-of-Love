@@ -49,8 +49,8 @@ function rollCompassionPrompt() {
             const currencyCount = rollWeightedCurrency();
             const currencyItems = rollItems(itemData.currency, currencyCount);
             
-            // Roll for loot items (1-2) from selected source
-            const lootCount = Math.floor(Math.random() * 2) + 1;
+            // Roll for loot items (1-2, with a 25% chance to roll 3) from selected source
+            const lootCount = rollCompassionLootCount();
             const lootItems = rollItems(lootSource, lootCount);
             
             // Roll for love letters (1-10, weighted toward 1-5)
@@ -70,7 +70,7 @@ function rollCompassionPrompt() {
         const currencyCount = rollWeightedCurrency();
         const currencyItems = rollItems(itemData.currency, currencyCount);
         
-        const lootCount = Math.floor(Math.random() * 2) + 1;
+        const lootCount = rollCompassionLootCount();
         const lootItems = rollItems(lootSource, lootCount);
         
         // Roll for love letters (1-10, weighted toward 1-5)
@@ -87,6 +87,12 @@ function rollCompassionPrompt() {
     
     // Display results
     displayCompassionResults(promptText, characterRewards);
+}
+
+function rollCompassionLootCount() {
+    // Default roll is 1-2, but 25% of the time roll 3.
+    if (Math.random() < 0.25) return 3;
+    return Math.floor(Math.random() * 2) + 1;
 }
 
 function rollItems(itemArray, count) {
