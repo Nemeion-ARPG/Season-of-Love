@@ -51,10 +51,10 @@ function rollRoyalAffair() {
     const isSuccess = roll < successRate;
     
     // Display results
-    displayRoyalResults(character, starter, starterTier, persistenceLevel, isSuccess, successRate);
+    displayRoyalResults(character, starter, starterTier, persistenceLevel, isSuccess, successRate, effortBonus, roll);
 }
 
-function displayRoyalResults(character, starter, starterTier, persistenceLevel, isSuccess, successRate) {
+function displayRoyalResults(character, starter, starterTier, persistenceLevel, isSuccess, successRate, effortBonus, roll) {
     const resultsDiv = document.getElementById('royal-results');
     const itemsDiv = document.getElementById('royal-items');
     
@@ -122,6 +122,25 @@ function displayRoyalResults(character, starter, starterTier, persistenceLevel, 
     
     itemsDiv.innerHTML = resultHTML;
     resultsDiv.classList.remove('hidden');
+
+    if (typeof window.logSeasonOfLoveRoll === 'function') {
+        window.logSeasonOfLoveRoll(
+            'A Royal Affair',
+            {
+                character,
+                starter,
+                starterTier,
+                persistenceLevel,
+                effortBonus: Boolean(effortBonus)
+            },
+            {
+                isSuccess,
+                successRate,
+                roll,
+                messageText: itemsDiv.innerText
+            }
+        );
+    }
 }
 
 function copyRoyalResults() {

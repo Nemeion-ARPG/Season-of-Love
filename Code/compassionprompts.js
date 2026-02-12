@@ -84,6 +84,21 @@ function rollCompassionPrompt() {
             loveLetterItems: loveLetterItems
         });
     }
+
+    if (typeof window.logSeasonOfLoveRoll === 'function') {
+        window.logSeasonOfLoveRoll(
+            'Compassion Prompts',
+            {
+                selectedPrompt,
+                effortLootEnabled,
+                characters
+            },
+            {
+                promptText,
+                characterRewards
+            }
+        );
+    }
     
     // Display results
     displayCompassionResults(promptText, characterRewards);

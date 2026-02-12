@@ -5,10 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Season of Love Item Roller</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="Scripts/auth.js?v=1"></script>
+    <script>
+        // Gate this page behind the login screen
+        if (typeof requireSeasonOfLoveAuth === 'function') {
+            requireSeasonOfLoveAuth();
+        }
+    </script>
+    <script src="Scripts/sheets-logger.js?v=1"></script>
 </head>
 <body>
     <div class="container">
         <h1>Season of Love Item Roller</h1>
+
+        <div class="auth-bar">
+            <span id="auth-user"></span>
+            <button class="logout-button" onclick="logoutSeasonOfLove()">Logout</button>
+        </div>
         
         <div class="tab-container">
             <!-- Tab Navigation -->

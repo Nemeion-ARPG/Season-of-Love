@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Season of Love Item Roller</title>
     <script>
-        // Redirect to main.html
-        window.location.href = 'main.html';
+        // Redirect based on session auth
+        const authed = sessionStorage.getItem('seasonOfLoveAuthenticated') === 'true';
+        window.location.href = authed ? 'main.html' : 'login.html';
     </script>
 </head>
 <body>

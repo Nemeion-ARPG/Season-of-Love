@@ -107,6 +107,23 @@ function rollCupidGift() {
     const randomBonus = Math.floor(Math.random() * 20) + 1;
     totalPoints += randomBonus;
     selectedOptions.push(`Random Bonus (${randomBonus} pts)`);
+
+    if (typeof window.logSeasonOfLoveRoll === 'function') {
+        const entryType = artworkRadio?.checked ? 'artwork' : (literatureRadio?.checked ? 'literature' : 'none');
+        window.logSeasonOfLoveRoll(
+            "Cupid's Point Calculator",
+            {
+                entryType,
+                effortScoreInput: effortInput?.value ?? '',
+                additionalCharactersInput: additionalInput?.value ?? '',
+                selectedOptions
+            },
+            {
+                totalPoints,
+                randomBonus
+            }
+        );
+    }
     
     // Display results
     displayCupidResults(totalPoints, selectedOptions);

@@ -101,6 +101,21 @@ function rollCupidCubs() {
     if (cubData[selectedType + 'cubblessings']) {
         results.blessings = rollWeightedItem(cubData[selectedType + 'cubblessings']);
     }
+
+    if (typeof window.logSeasonOfLoveRoll === 'function') {
+        window.logSeasonOfLoveRoll(
+            "Cupid's Cub Roller",
+            {
+                cubType: selectedType,
+                markingCount
+            },
+            {
+                ...results,
+                markings: Array.isArray(results.markings) ? results.markings : results.markings,
+                mutations: Array.isArray(results.mutations) ? results.mutations : results.mutations
+            }
+        );
+    }
     
     // Display results
     displayCubResults(selectedType, results);
