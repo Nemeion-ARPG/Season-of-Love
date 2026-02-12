@@ -4,7 +4,7 @@ This roller can POST roll results to a Google Sheet via a Google Apps Script Web
 
 ## 1) Create the Sheet
 
-Create a Google Sheet (any name). Add a tab named `Logs` (or use the first tab).
+Create a Google Sheet (any name). Add a tab named `SoL Logs`.
 
 Recommended header row (row 1):
 
@@ -26,14 +26,16 @@ Paste this code:
 ```js
 function doPost(e) {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
-  const sheet = ss.getSheetByName('Logs') || ss.getSheets()[0];
-
   let payload = {};
   try {
     payload = JSON.parse((e && e.postData && e.postData.contents) ? e.postData.contents : '{}');
   } catch (err) {
     payload = { type: 'bad_json', raw: (e && e.postData && e.postData.contents) ? e.postData.contents : '' };
   }
+
+  const targetName = payload.sheetName || 'SoL Logs';
+  let sheet = ss.getSheetByName(targetName);
+  if (!sheet) sheet = ss.insertSheet(targetName);
 
   const row = [
     new Date(),
@@ -51,6 +53,12 @@ function doPost(e) {
   return ContentService
     .createTextOutput(JSON.stringify({ ok: true }))
     .setMimeType(ContentService.MimeType.JSON);
+}
+
+function doGet() {
+  return ContentService
+    .createTextOutput('ok')
+    .setMimeType(ContentService.MimeType.TEXT);
 }
 ```
 

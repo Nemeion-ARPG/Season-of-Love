@@ -11,6 +11,7 @@
 	// TODO: Set this to your deployed Apps Script Web App URL.
 	// Example: https://script.google.com/macros/s/<DEPLOYMENT_ID>/exec
 	const SHEETS_LOGGER_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxq9VkhDx9Pbcw5OSW-I7WthN5cS_xxkxN57krvpT06TsRLBEZusapima8_Joiiv4DV6g/exec';
+	const SHEETS_LOGGER_SHEET_NAME = 'SoL Logs';
 
 	function isEnabled() {
 		return typeof SHEETS_LOGGER_ENDPOINT === 'string' && SHEETS_LOGGER_ENDPOINT.trim().length > 0;
@@ -25,6 +26,7 @@
 			app: 'Season-of-Love',
 			ts: new Date().toISOString(),
 			username: getUsername(),
+			sheetName: SHEETS_LOGGER_SHEET_NAME,
 			page: window.location.pathname.split('/').pop() || 'unknown',
 			userAgent: navigator.userAgent
 		};
@@ -34,14 +36,26 @@
 		if (!isEnabled()) return;
 
 		try {
+			const payload = JSON.stringify(event);
+
+			// Prefer sendBeacon when available (more reliable for "fire and forget")
+			if (navigator.sendBeacon) {
+				const ok = navigator.sendBeacon(
+					SHEETS_LOGGER_ENDPOINT,
+					new Blob([payload], { type: 'text/plain;charset=utf-8' })
+				);
+				if (ok) return;
+			}
+
 			// Fire-and-forget. With no-cors we cannot read the response, but the request is sent.
 			await fetch(SHEETS_LOGGER_ENDPOINT, {
 				method: 'POST',
 				mode: 'no-cors',
+				redirect: 'follow',
 				headers: {
 					'Content-Type': 'text/plain;charset=utf-8'
 				},
-				body: JSON.stringify(event),
+				body: payload,
 				keepalive: true
 			});
 		} catch (err) {
@@ -72,6 +86,14 @@
 			data: data ?? {}
 		};
 		void postEvent(event);
+	};
+
+	// Debug helper: run `testSheetsLogger()` in DevTools console.
+	window.testSheetsLogger = function testSheetsLogger() {
+		window.logSeasonOfLoveEvent('test', {
+			note: 'If you see this row, logging is working.',
+			hint: `Expected tab: ${SHEETS_LOGGER_SHEET_NAME}`
+		});
 	};
 })();
 
