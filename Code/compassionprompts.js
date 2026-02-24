@@ -41,6 +41,26 @@ function rollCompassionPrompt() {
     const effortLootEnabled = document.getElementById('effortLootCheck').checked;
     const lootSource = effortLootEnabled ? itemData.effortloot : itemData.loot;
     
+    const BONUS_COMPASSION_NAME = 'inicio 805';
+    const BONUS_ITEM_NAME = 'Medic Trait';
+
+    function normalizeCompassionName(value) {
+        return String(value ?? '').trim().toLowerCase();
+    }
+
+    function findItemLinkByName(name) {
+        const target = String(name ?? '').trim().toLowerCase();
+        const sources = [itemData?.loot, itemData?.effortloot, itemData?.loveletters, itemData?.currency];
+        for (const source of sources) {
+            if (!Array.isArray(source)) continue;
+            const match = source.find(it => String(it?.name ?? '').trim().toLowerCase() === target);
+            if (match?.link) return match.link;
+        }
+        return '#';
+    }
+
+    const bonusMedicTraitLink = findItemLinkByName(BONUS_ITEM_NAME);
+
     // Roll separate rewards for each character
     const characterRewards = [];
     if (characters.length > 0) {
@@ -52,6 +72,11 @@ function rollCompassionPrompt() {
             // Roll for loot items (1-2, with a 25% chance to roll 3) from selected source
             const lootCount = rollCompassionLootCount();
             const lootItems = rollItems(lootSource, lootCount);
+
+            const shouldAddBonusMedicTrait = normalizeCompassionName(character.char) === BONUS_COMPASSION_NAME;
+            if (shouldAddBonusMedicTrait) {
+                lootItems.push({ name: BONUS_ITEM_NAME, link: bonusMedicTraitLink });
+            }
             
             // Roll for love letters (1-10, weighted toward 1-5)
             const loveLetterCount = rollWeightedLoveLetters();
@@ -61,7 +86,7 @@ function rollCompassionPrompt() {
                 name: character.char,
                 player: character.player,
                 currencyCount: currencyCount,
-                lootCount: lootCount,
+                lootCount: lootCount + (shouldAddBonusMedicTrait ? 1 : 0),
                 loveLetterCount: loveLetterCount,
                 currencyItems: currencyItems,
                 lootItems: lootItems,
