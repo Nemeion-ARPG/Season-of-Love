@@ -41,7 +41,7 @@ function rollCompassionPrompt() {
     const effortLootEnabled = document.getElementById('effortLootCheck').checked;
     const lootSource = effortLootEnabled ? itemData.effortloot : itemData.loot;
     
-    const BONUS_COMPASSION_NAME = 'Exodus 420';
+    const BONUS_COMPASSION_NAME_RAW = 'Exodus 420';
     const BONUS_ITEM_NAME = 'Medic Trait';
 
     function normalizeCompassionName(value) {
@@ -51,6 +51,8 @@ function rollCompassionPrompt() {
             .trim()
             .toLowerCase();
     }
+
+    const BONUS_COMPASSION_NAME = normalizeCompassionName(BONUS_COMPASSION_NAME_RAW);
 
     function findItemLinkByName(name) {
         const target = String(name ?? '').trim().toLowerCase();
